@@ -9,4 +9,4 @@ class ListAutores(ListView):
 
     def get_queryset(self):
         palabra_clave = self.request.GET.get("kword","")
-        return Autor.objects.buscar_autor2(palabra_clave)
+        return Autor.objects.buscar_autor3(palabra_clave)
