@@ -24,3 +24,11 @@ class AutorManager(models.Manager):
         #    edad=35
         #)
         return resultado
+
+
+    def buscar_autor4(self, kword):
+        resultado = self.filter(
+            edad__gt=29,
+            edad__lt=31
+        ).order_by('apellidos', 'nombre', 'id')
+        return resultado
