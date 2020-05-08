@@ -16,3 +16,11 @@ class ListLibros(ListView):
             return Libro.objects.listar_libros2(palabra_clave, f1, f2)
         else:
             return Libro.objects.listar_libros(palabra_clave)
+
+
+class ListLibros2(ListView):
+    template_name = "libro/lista2.html"
+    context_object_name = "lista_libros"
+
+    def get_queryset(self):
+        return Libro.objects.listar_libros_categoria("4")

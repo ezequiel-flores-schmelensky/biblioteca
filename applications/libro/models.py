@@ -6,7 +6,7 @@ class Categoria(models.Model):
     nombre = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + " - " + self.nombre
 
 class Libro(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
