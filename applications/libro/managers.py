@@ -25,6 +25,16 @@ class LibroManager(models.Manager):
     def listar_libros_categoria(self, categoria):
         return self.filter(categoria__id=categoria).order_by('titulo')
 
+    def add_autor_libro(self, libro_id, autor):
+        libro = self.get(id=libro_id)
+        libro.autores.add(autor)
+        return libro
+
+    def remove_autor_libro(self, libro_id, autor):
+        libro = self.get(id=libro_id)
+        libro.autores.remove(autor)
+        return libro
+
 
 class CategoriaManager(models.Manager):
 

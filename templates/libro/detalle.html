@@ -1,0 +1,20 @@
+<h1>Detalle Libro</h1>
+
+<p>{{libro.titulo}}</p>
+<p>{{libro.fecha}}</p>
+<p>{{libro.categoria}}</p>
+
+<p>--------Many To Many---------</p>
+
+<ul>
+    {% for a in libro.autores.all %}
+        <li>{{ a }}</li>    
+    {% endfor %}
+</ul>
+
+<p>-------Agregar Autores---------</p>
+<!-- es con mixins -->
+<form method="POST">
+    <input type="text" placeholder="agregar autor">
+    <button type="submit">Guardar</button>
+</form>
