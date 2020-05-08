@@ -35,6 +35,12 @@ class LibroManager(models.Manager):
         libro.autores.remove(autor)
         return libro
 
+    def libros_num_prestados(self):
+        resultado = self.aggregate(
+            num_prestamos=Count('libro_prestamo')
+        )
+        return resultado
+
 
 class CategoriaManager(models.Manager):
 
