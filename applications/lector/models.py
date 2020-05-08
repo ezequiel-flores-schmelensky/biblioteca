@@ -1,6 +1,6 @@
 from django.db import models
 from applications.libro.models import Libro
-
+from .managers import PrestamoManager
 # Create your models here.
 class Lector(models.Model):
     nombres = models.CharField(max_length=50)
@@ -21,6 +21,8 @@ class Prestamo(models.Model):
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField(blank=True , null=True)
     devuelto = models.BooleanField()
+
+    objects = PrestamoManager()
 
     def __str__(self):
         return self.libro.titulo
