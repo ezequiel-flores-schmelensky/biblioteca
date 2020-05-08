@@ -1,0 +1,16 @@
+<h1>Lista de libros</h1>
+
+<p>
+    <form method="get">
+        {% csrf_token %}
+        <input type="text" id="kword" name="kword" placeholder="Ingrese nombre">
+        <button>Consultar</button>
+    </form>
+</p>
+
+<ul>
+    {% for l in lista_libros %}
+        <li>{{ l.titulo }} - {{ l.fecha }}</li>
+    {% endfor %}
+</ul>
+    
