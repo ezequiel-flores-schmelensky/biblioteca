@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import FormView
 from .models import Prestamo
-from .forms import PrestamoForm
+from .forms import PrestamoForm, MultiplePrestamoForm
 # Create your views here.
 
 class RegistrarPrestamo(FormView):
@@ -20,7 +20,7 @@ class RegistrarPrestamo(FormView):
         #     devuelto=False
         # )
 
-        prestamo = Prestamo.objects.create(
+        prestamo = Prestamo(
             lector=form.cleaned_data['lector'],
             libro=form.cleaned_data['libro'],
             fecha_prestamo=date.today(),
@@ -55,3 +55,28 @@ class AddPrestamo(FormView):
             return super(AddPrestamo, self).form_valid(form)
         else:
             return HttpResponseRedirect('/')
+
+
+class AddMultiplePrestamo(FormView):
+    template_name = 'lector/add_multiple_prestamo.html'
+    form_class = MultiplePrestamoForm
+    success_url = '.'
+
+    def form_valid(self, form):
+        print(form.cleaned_data['lector'])
+        print(form.cleaned_data['libros'])
+        
+        prestamos = []
+        for l in form.cleaned_data['libros']:
+            prestamo = Prestamo(
+                lector=form.cleaned_data['lector'],
+                libro=l,
+                fecha_prestamo=date.today(),
+                devuelto=False
+            )
+            prestamos.append(prestamo)
+
+        Prestamo.objects.bulk_create(
+            prestamos
+        )
+        return super(AddMultiplePrestamo, self).form_valid(form)
