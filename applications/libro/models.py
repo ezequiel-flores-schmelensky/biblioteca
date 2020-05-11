@@ -21,6 +21,7 @@ class Libro(models.Model):
     fecha = models.DateField('Fecha de lanzamiento')
     portada = models.ImageField(upload_to='portada')
     edad = models.PositiveIntegerField()
+    stok = models.PositiveIntegerField(default=0)
 
     objects = LibroManager()
 
