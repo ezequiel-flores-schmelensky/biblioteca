@@ -19,7 +19,14 @@ class Persona(models.Model):
         constraints = [
             models.CheckConstraint(check = models.Q(edad__gte=18), name='edad_mayor_18')
         ]
+        abstract = True
 
     def __str__(self):
         """Unicode representation of Persona."""
         return self.full_name
+
+class Empleados(Persona):
+    empleo = models.CharField('Empleo', max_length=50)
+
+class Cliente(Persona):
+    email = models.CharField('Email', max_length=50)
